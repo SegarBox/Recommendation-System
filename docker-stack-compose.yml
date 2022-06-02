@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  app:
+    image: registry.gitlab.com/gitops-widi/container-registry/segarbox/flask:3.8
+    ports:
+      - "5000:5000"
+    # volumes:
+    #   - ./base_env:/var/www/.env
+    networks:
+      - segarbox_network
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+
+networks:
+  segarbox_network:
+    driver: overlay
