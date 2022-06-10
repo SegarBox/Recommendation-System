@@ -1,22 +1,13 @@
 import os
 import tensorflow as tf
-p = os.path.abspath('.')
-print(p)
 
-path = os.path.join(p, "model")
+def getRecommend(id_user):
+	p = os.path.abspath('.')
+	path = os.path.join(p, "model")
+	loaded = tf.saved_model.load(path)
+	scores, titles = loaded([id_user])
+	result=[]
+	for x in titles[0][:10].numpy().tolist():
+		result.append(x.decode("utf-8"))
 
-# Save the index.
-# tf.saved_model.save(
-#   index,
-#   path,
-#   options=tf.saved_model.SaveOptions(namespace_whitelist=["Scann"])
-# )
-
-# Load it back; can also be done in TensorFlow Serving.
-loaded = tf.saved_model.load(path)
-
-# Pass a user id in, get top predicted movie titles back.
-scores, titles = loaded(["s"])
-
-print(f"Recommendations: {titles[0][:3]}")
-# print(scores)
+	return result
