@@ -11,7 +11,6 @@ def hello_geek():
 def recommendation():
     user_id = request.args.get('user_id')
     result = App.get.getRecommend(user_id)
-    print(result)
     return jsonify(result)
 
 if __name__ == "__main__":
