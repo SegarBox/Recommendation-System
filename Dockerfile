@@ -1,12 +1,10 @@
-FROM python:3.8-slim-buster
+FROM python:3.8
 
-WORKDIR /python-docker
+WORKDIR /usr/src/app
 
-# COPY requirements.txt requirements.txt
-# RUN pip3 install -r requirements.txt
+RUN pip3 install --no-cache-dir python-dotenv pymysql tensorflow-recommenders --upgrade tensorflow-datasets  numpy pandas flask
 
-RUN pip3 install python-dotenv pymysql tensorflow-recommenders --upgrade tensorflow-datasets  numpy pandas flask
-
+COPY ./Docker/wsgi.ini ./
 COPY . .
 
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+CMD ["uwsgi", "--ini", "wsgi.ini"]
