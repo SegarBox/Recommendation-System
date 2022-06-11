@@ -5,14 +5,15 @@ services:
     image: registry.gitlab.com/gitops-widi/container-registry/segarbox/flask:3.8
     ports:
       - "5000:5000"
-    networks:
-      - segarbox_network
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role == manager]
+      - "8000:80"
+#    networks:
+#      - segarbox_network
+#    deploy:
+#      mode: replicated
+#      replicas: 1
+#      placement:
+#        constraints: [node.role == manager]
 
-networks:
-  segarbox_network:
-    driver: overlay
+#networks:
+#  segarbox_network:
+#    driver: overlay
