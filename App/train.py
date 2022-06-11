@@ -10,7 +10,7 @@ import tensorflow_recommenders as tfrs
 from typing import Dict, Text
 from crud import select
 
-base = os.path.abspath('..')
+base = os.path.abspath('.')
 
 total_data = len(select())
 train_data = int(total_data * 0.8)
@@ -105,5 +105,5 @@ index.index_from_dataset(
 
 _, titles = index(tf.constant(["42"]))
 with tempfile.TemporaryDirectory() as tmp:
-  path = os.path.join(base, "model")
+  path = os.path.join(base, "Model")
   tf.saved_model.save(index, path)

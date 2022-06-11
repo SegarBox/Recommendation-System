@@ -3,7 +3,7 @@ import tensorflow as tf
 
 def getRecommend(id_user):
 	p = os.path.abspath('.')
-	path = os.path.join(p, "model")
+	path = os.path.join(p, "Model")
 	loaded = tf.saved_model.load(path)
 	scores, titles = loaded([id_user])
 	result=[]
